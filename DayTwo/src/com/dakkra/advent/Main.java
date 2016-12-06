@@ -78,11 +78,11 @@ public class Main {
     }
 
     private static void moveUp() {
-        fingerLocation = new Point(fingerLocation.x, Math.min(fingerLocation.y + 1, MAX_LOCATION));
+        fingerLocation = new Point(fingerLocation.x, Math.max(fingerLocation.y - 1, MIN_LOCATION));
     }
 
     private static void moveDown() {
-        fingerLocation = new Point(fingerLocation.x, Math.max(fingerLocation.y - 1, MIN_LOCATION));
+        fingerLocation = new Point(fingerLocation.x, Math.min(fingerLocation.y + 1, MAX_LOCATION));
     }
 
     private enum Key {
