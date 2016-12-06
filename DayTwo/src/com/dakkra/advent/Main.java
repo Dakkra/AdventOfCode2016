@@ -1,7 +1,5 @@
 package com.dakkra.advent;
 
-import jdk.internal.util.xml.impl.Input;
-
 import java.awt.*;
 import java.io.BufferedReader;
 import java.io.InputStream;
@@ -12,11 +10,79 @@ public class Main {
     private static String bathroomCode = "";
     private static InputStream inputStream;
     private static BufferedReader bufferedReader;
+    private static Point fingerLocation = new Point(2, 2);
+    private static final int MAX_LOCATION = 3;
+    private static final int MIN_LOCATION = 1;
+    /*
+       1 2 3
+    1 |1|2|3|
+    2 |4|5|6|
+    3 |7|8|9|
+
+    2,2 is the center
+     */
 
     public static void main(String[] args) {
         inputStream = Main.class.getResourceAsStream("input");
         bufferedReader = new BufferedReader(new InputStreamReader(inputStream));
+        try {
+            boolean doneReading = false;
+            while (!doneReading) {
+                String line = bufferedReader.readLine();
+                if (line != null) {
+                    processLine(line);
+                    bathroomCode += Key.getKeyAtCoord(fingerLocation).getVal();
+                } else
+                    doneReading = true;
 
+            }
+            bufferedReader.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        System.out.println(bathroomCode);
+    }
+
+    private static void processLine(String line) {
+        for (char c : line.toCharArray()) {
+            switch (c) {
+                case 'L': {
+                    moveLeft();
+                    break;
+                }
+                case 'R': {
+                    moveRight();
+                    break;
+                }
+                case 'U': {
+                    moveUp();
+                    break;
+                }
+                case 'D': {
+                    moveDown();
+                    break;
+                }
+                default:
+                    break;
+            }
+        }
+    }
+
+    private static void moveLeft() {
+        fingerLocation = new Point(Math.max(fingerLocation.x - 1, MIN_LOCATION), fingerLocation.y);
+    }
+
+    private static void moveRight() {
+        fingerLocation = new Point(Math.min(fingerLocation.x + 1, MAX_LOCATION), fingerLocation.y);
+    }
+
+    private static void moveUp() {
+        fingerLocation = new Point(fingerLocation.x, Math.min(fingerLocation.y + 1, MAX_LOCATION));
+    }
+
+    private static void moveDown() {
+        fingerLocation = new Point(fingerLocation.x, Math.max(fingerLocation.y - 1, MIN_LOCATION));
     }
 
     private enum Key {
