@@ -3,6 +3,7 @@ package com.dakkra.advent;
 import java.io.BufferedReader;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.util.Arrays;
 import java.util.LinkedList;
 
 public class Main {
@@ -39,44 +40,33 @@ public class Main {
     }
 
     private static void assesLine(String lineBuffer) {
-        int num[] = new int[3];
-        int numIndex = 0;
-        int charIndex = 0;
-        char charBuff;
-        char lineBufChars[] = lineBuffer.toCharArray();
-        String stringBuff = "";
-
-        while (numIndex <= 2) {
-            while ((charBuff = lineBufChars[charIndex++]) == ' ' && charIndex < lineBufChars.length) {
-                //literally do nothing here...
-            }
-            stringBuff += charBuff;
-            if (charIndex < lineBufChars.length)
-                while ((charBuff = lineBufChars[charIndex++]) != ' ' && charIndex < lineBufChars.length) {
-                    stringBuff += charBuff;
-                }
-            num[numIndex] = Integer.parseInt(stringBuff);
-            numIndex++;
-            stringBuff = "";
+        String numbersStrings[] = lineBuffer.split("\\s+");
+        int numbers[] = new int[3];
+        int numbersIndex = 0;
+        for (String s : numbersStrings) {
+            if (!s.equals(""))
+                numbers[numbersIndex++] = Integer.parseInt(s);
         }
-        triangles.add(new Triangle(num[0], num[1], num[2]));
+        Arrays.sort(numbers);
+        triangles.add(new Triangle(numbers[2], numbers[1], numbers[0]));
     }
 
     static class Triangle {
-        int l, w, h;
+        int largest, w, l;
 
-        public Triangle(int l, int w, int h) {
-            this.l = l;
+        public Triangle(int largest, int w, int l) {
+            this.largest = largest;
             this.w = w;
-            this.h = h;
+            this.l = l;
         }
 
         public boolean isRealTriangle() {
-            boolean testOne, testTwo, testThree;
-            testOne = (l + w) >= h;
-            testTwo = (l + h) >= w;
-            testThree = (w + h) >= l;
-            return (testOne && testTwo && testThree);
+            return (w + l) > largest;
+        }
+
+        @Override
+        public String toString() {
+            return "L: " + largest + " W: " + w + " H: " + l;
         }
     }
 
