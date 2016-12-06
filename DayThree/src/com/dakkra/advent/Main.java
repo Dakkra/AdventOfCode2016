@@ -75,7 +75,7 @@ public class Main {
             boolean testOne, testTwo, testThree;
             testOne = (l + w) >= h;
             testTwo = (l + h) >= w;
-            testThree = (w + h) > l;
+            testThree = (w + h) >= l;
             return (testOne && testTwo && testThree);
         }
     }
