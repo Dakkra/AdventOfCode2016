@@ -9,6 +9,7 @@ public class DayFour {
 
     private static LinkedList<String> lines;
     private static LinkedList<Room> rooms;
+    private static int sumOfRealRooms = 0;
     private static InputStream inputStream;
     private static BufferedReader bufferedReader;
 
@@ -34,7 +35,11 @@ public class DayFour {
         for (String s : lines)
             rooms.add(new Room(s));
 
-        for (Room r : rooms)
-            r.testRoom();
+        for (Room r : rooms) {
+            if (r.isRealRoom())
+                sumOfRealRooms += r.getRoomID();
+        }
+
+        System.out.println(sumOfRealRooms);
     }
 }
