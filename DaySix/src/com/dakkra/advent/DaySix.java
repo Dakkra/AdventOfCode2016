@@ -108,7 +108,7 @@ public class DaySix {
         public int compareTo(Object o) {
             CharCount cc = (CharCount) o;
             int otherCount = cc.getCount();
-            return (count > otherCount) ? 1 : -1;
+            return (count < otherCount) ? 1 : -1;
         }
     }
 
