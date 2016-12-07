@@ -16,7 +16,7 @@ public class DayFour {
     public static void main(String[] args) {
         lines = new LinkedList<>();
         rooms = new LinkedList<>();
-        inputStream = DayFour.class.getResourceAsStream("input2");
+        inputStream = DayFour.class.getResourceAsStream("input");
         bufferedReader = new BufferedReader(new InputStreamReader(inputStream));
 
         try {

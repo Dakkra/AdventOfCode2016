@@ -119,8 +119,8 @@ public class Room {
     }
 
     class CharIndex implements Comparable {
-        char c;
-        int count;
+        private char c;
+        private int count;
 
         public CharIndex(char c, int num) {
             this.c = c;
@@ -140,8 +140,11 @@ public class Room {
         public int compareTo(Object o) {
             CharIndex ci = (CharIndex) o;
             int otherCount = ci.getCount();
-            if (count == otherCount)
-                return 0;
+            if (count == otherCount) {
+                int mVal = c;
+                int oVal = ci.getC();
+                return (oVal > mVal) ? 1 : -1;
+            }
             return (count > otherCount) ? 1 : -1;
         }
     }
