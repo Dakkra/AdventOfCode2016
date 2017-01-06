@@ -18,6 +18,7 @@ window.onload = function () {
 
 function processInput() {
     console.log(currentOriantation);
+    var numBuffer = "";
     for (var i = 0; i < input.length; i++) {
         console.log(input[i]);
         switch (input[i]) {
@@ -37,11 +38,12 @@ function processInput() {
                 break;
             }
             case ",": {
+                move(parseInt(numBuffer));
+                numBuffer = "";
                 break;
             }
             default: {
-                console.log(input[i]);
-                move(parseInt(input[i]));
+                numBuffer += input[i];
                 break;
             }
         }

@@ -14,7 +14,7 @@ public class Main {
     public static void main(String[] args) {
         //Init ArrayList buffer and input stream
         inputCommands = new ArrayList<>();
-        inputStream = Main.class.getResourceAsStream("input2");
+        inputStream = Main.class.getResourceAsStream("input");
 
         try {
             boolean doneReading = false;
